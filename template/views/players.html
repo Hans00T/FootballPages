@@ -1,0 +1,20 @@
+<div>
+    <div id="right-div" style="width: wrap-content; float: right; box-sizing: border-box;">
+        <table id="players">
+            <tr>
+                <th>Etunimi</th>
+                <th>Sukunimi</th>
+                <th>Pelinumero</th>
+            </tr>
+            <tb>
+                {{#each players}}
+                    <tr>
+                        <td>{{this.Etunimi}}</td>
+                        <td>{{this.Sukunimi}}</td>
+                        <td>{{this.Pelinumero}}</td>
+                    </tr>
+                {{/each}}
+            </tb>
+        </table>
+    </div>
+</div>

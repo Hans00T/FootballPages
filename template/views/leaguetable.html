@@ -1,0 +1,33 @@
+<div>
+    <div id="left-div" style="width: wrap-content; float: left; box-sizing: border-box;">
+        <table>
+            <tr>
+                <th>Nimi</th>
+                <th>Kaupunki</th>
+                <th>Perustamisvuosi</th>
+                <th>Ottelut</th>
+                <th>Voitot</th>
+                <th>Tappiot</th>
+                <th>Tasapelit</th>
+                <th>Maaliero</th>
+                <th>Pisteet</th>
+            </tr>
+            <tb>
+                {{#each sarjat}}
+                    <tr>
+                        <td>{{this.nimi}}</td>
+                        <td>{{this.kaupunki}}</td>
+                        <td>{{this.perustamisvuosi}}</td>
+                        <td>{{this.ottelut}}</td>
+                        <td>{{this.voitot}}</td>
+                        <td>{{this.tappiot}}</td>
+                        <td>{{this.tasapelit}}</td>
+                        <td>{{this.maaliero}}</td>
+                        <td>{{this.pisteet}}</td>
+                    </tr>
+                {{/each}}
+            </tb>
+        </table>
+    </div>
+    <div id="right-div" style="width: wrap-content; float: right; box-sizing: border-box;"></div>
+</div>

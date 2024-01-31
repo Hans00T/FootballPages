@@ -1,0 +1,16 @@
+<div>
+    <div id="left-div" style="width: wrap-content; float: left; box-sizing: border-box;"> 
+        <ul>
+            {{#each players}}
+                <li>{{this.Etunimi}} {{this.Sukunimi}} {{this.Pelinumero}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <div id="right-div" style="width: wrap-content; float: right; box-sizing: border-box;">
+        <ol>
+            {{#each teams}}
+                <li>{{this.Nimi}} {{this.Kaupunki}} {{this.Perustamisvuosi}}</li>
+            {{/each}}
+        </ol>
+    </div>
+</div>

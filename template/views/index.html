@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <style>
+            .item1 { grid-area: header; }
+            .item2 { grid-area: menu; }
+            .item3 { grid-area: main; }
+            .item4 { grid-area: right; }
+            .item5 { grid-area: footer; }
+
+            .grid-container {
+                display: grid;
+                grid-template-areas:
+                    'header header header header header header'
+                    'menu main main main main right'
+                    'footer footer footer footer footer footer';
+                gap: 10px;
+                height: 100%;
+            }
+
+            .grid-container > div {
+                background-color: rgb(179, 216, 227);
+                padding: 20px 0;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th, td {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+        </style>
+        <script>
+            $(function() {
+                $("#siteAds").load("http://localhost:3004/events");
+
+                $("#mainNav").on("click", "#sarjataulu", function(e) {
+                    e.preventDefault();
+                    $("#left-div").empty();
+                    $("#right-div").empty();
+                    $("#left-div").load("http://localhost:3004/leaguetable");
+                });
+
+                $("#mainNav").on("click", "#pelaajattiimit", function(e) {
+                    e.preventDefault();
+                    $("#left-div").empty();
+                    $("#right-div").empty();
+                    $("#mainArticle").load("http://localhost:3004/playersandteams", function() {
+                        $("#left-div").on("click", ".team-link", function(e) {
+                            e.preventDefault();
+                            var teamId = $(this).attr("id");
+                            loadPlayersForTeam(teamId);
+                        });
+                    });
+                });
+
+                $("#mainNav").on("click", "#playerinfo", function(e) {
+                    e.preventDefault();
+                    $("#left-div").empty();
+                    $("#right-div").empty();
+                    $("#left-div").load("http://localhost:3004/teams", function() {
+                        $("#left-div").on("click", ".team-link", function(e) {
+                            e.preventDefault();
+                            var teamId = $(this).attr("id");
+                            loadPlayersForTeam(teamId);
+                        });
+                    });
+                });
+
+                function loadPlayersForTeam(teamId) {
+                    $("#right-div").load("http://localhost:3004/players?teamId=" + teamId);
+                }
+            });
+        </script>
+
+    </head>
+
+    <body>
+        <div class="grid-container">
+            <div id="pageHeader" class="item1" style="text-align:right;">
+                Welcome to football pages!
+                <select id="choose" style="margin-right: 10px;">
+                    {{#each options}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div id="mainNav" class="item2" style="padding:10px;">
+                <ul style="list-style-type: none;">
+                    <li><a id="sarjataulu" href="">League table</a></li>
+                    <li><a id="pelaajattiimit" href="">Players and teams</a></li>
+                        <ul>
+                            <li><a id="playerinfo" href="">Information about players</a></li>
+                        </ul>
+                </ul>
+            </div>
+
+            <div id="mainArticle" class="item3" style="padding:10px;">
+                <div id="left-div" style="width: wrap-content; float: left; box-sizing: border-box;"><p>Click one of the links on the left</p></div>
+                <div id="right-div" style="width: wrap-content; float: right; box-sizing: border-box;"> </div>
+            </div>
+
+            <div id="siteAds" class="item4" style="padding:10px;"> </div>
+
+            <div id="pageFooter" class="item5" style="height:50px;text-align:center;line-height:50px;"> <p>Contact information</p> </div>
+        </div>
+    </body>
+</html>
